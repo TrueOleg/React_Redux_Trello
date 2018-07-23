@@ -1,0 +1,9 @@
+export const
+    LOGIN_HAS_ERRORED = 'LOGIN_HAS_ERRORED',
+    IS_LOGIN = 'IS_LOGIN',
+    SAVE_MY_BOARDS = 'SAVE_MY_BOARDS',
+    SAVE_FRIENDS_POSTS = 'SAVE_FRIENDS_POSTS',
+    SAVE_USERS = 'SAVE_USERS',
+    CLEAR_USERS = 'CLEAR_USERS',
+    URL = 'http://localhost:3000/api';
+    
