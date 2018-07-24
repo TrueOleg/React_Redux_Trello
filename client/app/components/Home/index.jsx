@@ -53,7 +53,7 @@ class Home extends React.Component {
             return <Redirect to="/sign-in"/>;
         }
 
-        const list = this.state.isOpen ? <FoundUsers /> : null;
+        
         
         return (
                 <div>

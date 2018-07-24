@@ -10,14 +10,16 @@ const Op = sequelize.Op;
 router.post('/', verify, async (req, res, next) => {
     try {
         const {title} = req.body;
+        
         const userId = req._userId;
-        await models.Boards
+        const save = await models.Boards
                 .build({ user_id: userId, title: title })
                 .save();
         const boards = await  models.Boards.findAll({
           attributes: ['id', 'title'], 
           where: {user_id: userId}, raw: true
           });    
+           
         res.status(200).send({
             message: 'success',
             result: true,
@@ -26,8 +28,27 @@ router.post('/', verify, async (req, res, next) => {
     } 
     catch(err) {
         next(new Error(err.message));
-    }    
+    }   
+});    
+
+router.get('/my', verify, async (req, res, next) => {
+    try {        
+        const userId = req._userId;
+        const boards = await models.Boards.findAll({
+            attributes: ['id', 'title'], 
+            where: {user_id: userId}, raw: true
+        });
+        res.status(200).send({
+            message: 'success',
+            result: true,
+            boards
+        });
+    } 
+    catch(err) {
+        next(new Error(err.message));
+    }      
 }); 
+
 
 
 

@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import User from '../User';
+import * as actions from '../../redux/actions/boardsActions'; 
+
 
 class NewBoardForm extends React.Component {
   constructor(props) {
@@ -17,7 +19,7 @@ class NewBoardForm extends React.Component {
   onChange(event) {
     const field = event.target.name;
     const newBoard = this.state.newBoard;
-    credentials[field] = event.target.value;
+    newBoard[field] = event.target.value;
     return this.setState({newBoard: newBoard});
   }
 
@@ -25,7 +27,7 @@ class NewBoardForm extends React.Component {
     event.preventDefault();
     this.props.writeBoard(this.state.newBoard);
     this.setState({ newBoard: {title: ''}});
-    this.props.showNewBoardForm();
+    this.props.hide(event);
   }
 
   render() {
@@ -56,7 +58,7 @@ const mapStateToProps = (state) => {
   };
 
 const mapDispatchToProps = (dispatch) => ({
-  writeBoard: () => dispatch(actions.writeBoard())
+  writeBoard: (data) => dispatch(actions.writeBoard(data))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewBoardForm);
+export default connect(null, mapDispatchToProps)(NewBoardForm);

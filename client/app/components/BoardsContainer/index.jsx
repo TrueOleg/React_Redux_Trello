@@ -10,8 +10,9 @@ import {
 import * as styles from '../style/Home'; 
 import * as Token from '../../servises/Token';
 import * as actions from '../../redux/actions/authAction'; 
-import * as usersActions from '../../redux/actions/searchUsers';  
+import * as boardsActions from '../../redux/actions/boardsActions';  
 import NewBoardForm from '../NewBoardForm';
+import ListBoards from '../ListBoards';
 
 class BoardsContainer extends React.Component {
     constructor(props) {
@@ -23,7 +24,10 @@ class BoardsContainer extends React.Component {
         this.showNewBoardForm = this.showNewBoardForm.bind(this);
     }
 
-    
+    componentDidMount() {
+       this.props.getBoards();
+        
+    }
 
     showNewBoardForm(event) {
         event.preventDefault();
@@ -33,32 +37,44 @@ class BoardsContainer extends React.Component {
     
     
     render () {
-
-        const form = this.state.isOpen ? <NewBoardForm props={this.props.showNewBoardForm}/> : <button onClick={this.showNewBoardForm}>Add Board</button>;
-
-        return (
+        
+        const form = this.state.isOpen ? <NewBoardForm hide={this.showNewBoardForm}/> : <button onClick={this.showNewBoardForm}>Add Board</button>;
+        if (this.props.myBoards === 0) {
+            return (
                 <div>
+                    <h2>List Boards</h2>
                     <ul>
                         <li>{form}</li>
                     </ul>
-
-                    <hr/>
-
-                    
                 </div> 
-        );
+            );    
+        } else {
+            return (
+                <div>
+                    <h2>List Boards</h2>
+                    <ul>
+                        <ListBoards boards={this.props.myBoards}/> 
+                        <li>{form}</li>
+                    </ul>
+                    <ViewBoards boards={this.props.myBoards}/>
+                </div> 
+            );    
+        }
+        
     }
 }
 
 
 const mapStateToProps = (state) => {
     return {
-        
+        isAuthenticated: state.auth.user.isAuthenticated,
+        myBoards: state.boards.myBoards
     };
   };
 
 const mapDispatchToProps = (dispatch) => ({
-    writeBoard: (data) => dispatch(actions.writeBoard(data))
+    
+    getBoards: () => dispatch(boardsActions.getBoards()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardsContainer);
