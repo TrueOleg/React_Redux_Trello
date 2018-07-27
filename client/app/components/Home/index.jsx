@@ -64,7 +64,7 @@ class Home extends React.Component {
                         <button onClick={this.generateLink}>Generate Link</button>   
                     </div>
                     <br />
-                    <BoardsContainer />
+                    <BoardsContainer {...this.props}/>
                 </div> 
         );
     }

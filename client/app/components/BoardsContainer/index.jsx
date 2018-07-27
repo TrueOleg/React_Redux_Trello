@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {
     BrowserRouter as Router,
     Route,
+    IndexRoute,
     Link
   } from 'react-router-dom';  
 
@@ -13,6 +14,9 @@ import * as actions from '../../redux/actions/authAction';
 import * as boardsActions from '../../redux/actions/boardsActions';  
 import NewBoardForm from '../NewBoardForm';
 import ListBoards from '../ListBoards';
+import ViewBoards from '../ViewBoards';
+import Board from '../Board';
+
 
 class BoardsContainer extends React.Component {
     constructor(props) {
@@ -53,10 +57,12 @@ class BoardsContainer extends React.Component {
                 <div>
                     <h2>List Boards</h2>
                     <ul>
-                        <ListBoards boards={this.props.myBoards}/> 
+                        <ListBoards boards={this.props.myBoards} {...this.props}/> 
                         <li>{form}</li>
                     </ul>
-                    <ViewBoards boards={this.props.myBoards}/>
+                    
+                        <Route path="/boards" render={() => <Board board={this.props.location.state}/>}/>
+                    
                 </div> 
             );    
         }

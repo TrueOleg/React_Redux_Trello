@@ -12,38 +12,25 @@ import * as Token from '../../servises/Token';
 import * as actions from '../../redux/actions/authAction'; 
 import * as boardsActions from '../../redux/actions/boardsActions';  
 import NewBoardForm from '../NewBoardForm';
-import ListBoards from '../ListBoards';
+import Board from '../Board';
 
-class ViewBoards extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            
-           
-        };
-        
-    }
 
-    componentDidMount() {
-       
-        
-    }
-
+    
+const ViewBoards = (props) => {
     
     
     
-    render () {
+    
         
       const { boards } = props;
       const comp = boards.map( 
                       (item) => 
-                        <li key={item.title}><Route  to={{
-                                                          pathname: '/boards',
-                                                          search: `?id=${item.id}`,
-                                                          hash: '#the-hash',
-                                                          state: { fromDashboard: true }
+                        <li key={item.title}><Route exact to={{
+                                                        pathname: '/boards',
+                                                        search: `?id=${item.id}`    
                                                         }}
-                                                        component={Board}  
+                                                         component={Board } 
+                                                        
                                             />
                                             
                         </li> );
@@ -54,20 +41,10 @@ class ViewBoards extends React.Component {
           </div>
       );
         
-    }
+    
 }
 
 
-const mapStateToProps = (state) => {
-    return {
-        isAuthenticated: state.auth.user.isAuthenticated,
-        
-    };
-  };
 
-const mapDispatchToProps = (dispatch) => ({
-    
-    
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewBoards);
+export default ViewBoards;

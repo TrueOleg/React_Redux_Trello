@@ -4,7 +4,7 @@ import {
   Route,
   Link
 } from 'react-router-dom'; 
-
+import Board from '../Board';
 
 const ListBoards = (props) => {
   
@@ -13,9 +13,8 @@ const ListBoards = (props) => {
                     (item) => 
                       <li key={item.title}><Link  to={{
                                                         pathname: '/boards',
-                                                        search: `?id=${item.id}`,
-                                                        hash: '#the-hash',
-                                                        state: { fromDashboard: true }
+                                                        search: `?id=${item.id}`, 
+                                                        state: {...item}
                                                       }}
                                           >
                                           {item.title}
@@ -23,7 +22,9 @@ const ListBoards = (props) => {
                       </li> );
     return (
         <div>
-            <ul>{comp}</ul>
+            <ul>
+                {comp}
+            </ul>
             
         </div>
     );
