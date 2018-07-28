@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import User from '../User';
-import * as actions from '../../redux/actions/boardsActions'; 
+import * as actions from '../../redux/actions/tasksAction'; 
 
 
 class NewTaskForm extends React.Component {
@@ -25,7 +25,7 @@ class NewTaskForm extends React.Component {
 
   addTask(event) {
     event.preventDefault();
-    this.props.writeTask(this.state.newTask);
+    this.props.writeTask(this.state.newTask, this.props.status, this.props.boardId);
     this.setState({ newTask: {title: '', content: ''}});
     this.props.hide(event);
   }
@@ -33,7 +33,7 @@ class NewTaskForm extends React.Component {
   render() {
     return (
       <form>
-      <h1>New Board</h1>
+      <h1>New Task</h1>
       <p>Enter title</p>
       <input
         name="title"
@@ -42,6 +42,7 @@ class NewTaskForm extends React.Component {
         onChange={this.onChange}
         />
       <br />
+      <p>Enter content</p>
       <input
         name="content"
         label="content"
@@ -53,7 +54,7 @@ class NewTaskForm extends React.Component {
         type="submit"
         className="btn btn-primary"
         value="Create"
-        onClick={this.addBoard}
+        onClick={this.addTask}
         />
     </form>  
     )
@@ -65,7 +66,7 @@ const mapStateToProps = (state) => {
   };
 
 const mapDispatchToProps = (dispatch) => ({
-  writeTask: (data) => dispatch(actions.writeTask(data))
+  writeTask: (data, status, id) => dispatch(actions.writeTask(data, status, id))
 });
 
 export default connect(null, mapDispatchToProps)(NewTaskForm);

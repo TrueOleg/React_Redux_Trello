@@ -8,22 +8,22 @@ export const saveMyTasks = (tasks) => {
   };
 };  
 
-export const getTasks = () => {
+export const getTasks = (boardId, status) => {
     return (dispatch) => {
  
-        Api.get(`${Const.URL}/tasks/my`)
+        Api.get(`${Const.URL}/tasks/my?board_id=${boardId}&status=${status}`)
             .then(res => {
-              dispatch(saveMyBoards(res.data.tasks));
+            //   dispatch(saveMyBoards(res.data.tasks));
                 
             })
             .catch(() => dispatch(loginHasErrored(true)));
     };
 };
 
-export const writeTasks = (data) => {
+export const writeTask = (data, status, id) => {
     return (dispatch) => {
  
-        Api.post(`${Const.URL}/tasks/`, data)
+        Api.post(`${Const.URL}/tasks/`, {data, status, id})
             .then(res => {
               dispatch(saveMyBoards(res.data.tasks));
                 

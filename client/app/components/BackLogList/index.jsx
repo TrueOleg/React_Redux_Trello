@@ -10,7 +10,7 @@ import {
 import * as styles from '../style/Home'; 
 import * as Token from '../../servises/Token';
 import * as actions from '../../redux/actions/authAction'; 
-import * as boardsActions from '../../redux/actions/boardsActions';  
+import * as tasksActions from '../../redux/actions/tasksAction';  
 import NewTaskForm from '../NewTaskForm';
 
 
@@ -25,7 +25,7 @@ class BackLogList extends React.Component {
     }
 
     componentDidMount() {
-       
+       this.props.getTasks(this.props.boardId, this.state.status)
         
     }
 
@@ -38,7 +38,7 @@ class BackLogList extends React.Component {
     
     render () {
         
-      const form = this.state.isOpen ? <NewTaskForm hide={this.showNewTaskForm} status={this.state.status}/> : <button onClick={this.showNewTaskForm}>Add Task</button>;
+      const form = this.state.isOpen ? <NewTaskForm hide={this.showNewTaskForm} status={this.state.status} boardId={this.props.boardId}/> : <button onClick={this.showNewTaskForm}>Add Task</button>;
 
       return (
           <div>
@@ -59,8 +59,7 @@ const mapStateToProps = (state) => {
   };
 
 const mapDispatchToProps = (dispatch) => ({
-    
-    
+        getTasks: (boardId, status) => dispatch(tasksActions.getTasks(boardId, status)),    
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BackLogList);

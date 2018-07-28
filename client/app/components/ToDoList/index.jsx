@@ -11,17 +11,17 @@ import * as styles from '../style/Home';
 import * as Token from '../../servises/Token';
 import * as actions from '../../redux/actions/authAction'; 
 import * as boardsActions from '../../redux/actions/boardsActions';  
-import NewBoardForm from '../NewBoardForm';
+import NewTaskForm from '../NewTaskForm';
 
 
 class ToDoList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            
-           
+           isOpen: false, 
+           status: 'todo'
         };
-        
+        this.showNewTaskForm = this.showNewTaskForm.bind(this);
     }
 
     componentDidMount() {
@@ -29,16 +29,21 @@ class ToDoList extends React.Component {
         
     }
 
-    
+    showNewTaskForm(event) {
+        event.preventDefault();
+        
+        this.setState({ isOpen: !this.state.isOpen});
+    }
     
     
     render () {
         
-      
+      const form = this.state.isOpen ? <NewTaskForm hide={this.showNewTaskForm} status={this.state.status} boardId={this.props.boardId}/> : <button onClick={this.showNewTaskForm}>Add Task</button>;
+
       return (
           <div>
-              <h3>ToDoList</h3>
-              
+              <h3>ToDo</h3>
+              {form}
           </div>
       );
         

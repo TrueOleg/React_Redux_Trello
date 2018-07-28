@@ -46,9 +46,9 @@ class Board extends React.Component {
           <div>
               <h3>{this.props.board.title}</h3>
               <React.Fragment>
-                <BackLogList />
-                <ToDoList />
-                <DoneList />
+                <BackLogList boardId={this.props.board.id}/>
+                <ToDoList boardId={this.props.board.id}/>
+                <DoneList boardId={this.props.board.id}/>
               </React.Fragment>  
           </div>
       );
