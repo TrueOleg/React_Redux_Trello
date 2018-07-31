@@ -8,10 +8,11 @@ import {
   } from 'react-router-dom';  
 
 import * as styles from '../style/Home'; 
-import * as Token from '../../servises/Token';
+
 import * as actions from '../../redux/actions/authAction'; 
 import * as tasksActions from '../../redux/actions/tasksAction';  
 import NewTaskForm from '../NewTaskForm';
+import Task from '../Task';
 
 
 class BackLogList extends React.Component {
@@ -24,9 +25,14 @@ class BackLogList extends React.Component {
         this.showNewTaskForm = this.showNewTaskForm.bind(this);
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.boardId !== prevProps.boardId) {
+            this.props.getTasks(this.props.boardId, this.state.status);
+          }
+    }
+    
     componentDidMount() {
-       this.props.getTasks(this.props.boardId, this.state.status)
-        
+        this.props.getTasks(this.props.boardId, this.state.status);
     }
 
     showNewTaskForm(event) {
@@ -38,12 +44,26 @@ class BackLogList extends React.Component {
     
     render () {
         
-      const form = this.state.isOpen ? <NewTaskForm hide={this.showNewTaskForm} status={this.state.status} boardId={this.props.boardId}/> : <button onClick={this.showNewTaskForm}>Add Task</button>;
-
+      const form =  this.state.isOpen 
+                    ? <NewTaskForm 
+                        hide={this.showNewTaskForm} 
+                        status={this.state.status} 
+                        boardId={this.props.boardId}
+                    /> 
+                    : <button onClick={this.showNewTaskForm}>Add Task</button>;
+      const tasks = this.props.backLogTasks !== 0 
+                    ? this.props.backLogTasks.map(
+                                                (item) => 
+                                                <li key={item.id}>
+                                                    <Task task={item} />
+                                                </li>
+                                                )
+                    : null;                                        
       return (
           <div>
               <h3>BackLog</h3>
               {form}
+              {tasks}
           </div>
       );
         
@@ -54,7 +74,7 @@ class BackLogList extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.auth.user.isAuthenticated,
-        
+        backLogTasks: state.tasks.backLogTasks
     };
   };
 

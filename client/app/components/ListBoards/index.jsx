@@ -11,7 +11,7 @@ const ListBoards = (props) => {
     const { boards } = props;
     const comp = boards.map( 
                     (item) => 
-                      <li key={item.title}><Link  to={{
+                      <li key={item.id}><Link  to={{
                                                         pathname: '/boards',
                                                         search: `?id=${item.id}`, 
                                                         state: {...item}

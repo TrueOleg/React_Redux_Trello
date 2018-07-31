@@ -10,8 +10,9 @@ import {
 import * as styles from '../style/Home'; 
 import * as Token from '../../servises/Token';
 import * as actions from '../../redux/actions/authAction'; 
-import * as boardsActions from '../../redux/actions/boardsActions';  
+import * as tasksActions from '../../redux/actions/tasksAction';  
 import NewTaskForm from '../NewTaskForm';
+import Task from '../Task';
 
 
 class DoneList extends React.Component {
@@ -24,9 +25,14 @@ class DoneList extends React.Component {
         this.showNewTaskForm = this.showNewTaskForm.bind(this);
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.boardId !== prevProps.boardId) {
+            this.props.getTasks(this.props.boardId, this.state.status);
+          }
+    }
+    
     componentDidMount() {
-       
-        
+        this.props.getTasks(this.props.boardId, this.state.status);
     }
 
     showNewTaskForm(event) {
@@ -38,12 +44,26 @@ class DoneList extends React.Component {
     
     render () {
         
-      const form = this.state.isOpen ? <NewTaskForm hide={this.showNewTaskForm} status={this.state.status} boardId={this.props.boardId}/> : <button onClick={this.showNewTaskForm}>Add Task</button>;
-
+      const form = this.state.isOpen 
+                    ? <NewTaskForm 
+                        hide={this.showNewTaskForm} 
+                        status={this.state.status} 
+                        boardId={this.props.boardId}
+                    /> 
+                    : <button onClick={this.showNewTaskForm}>Add Task</button>;
+      const tasks = this.props.doneTasks !== 0 
+                    ? this.props.doneTasks.map(
+                                                (item) => 
+                                                <li key={item.id}>
+                                                    <Task task={item} />
+                                                </li>
+                                                )
+                    : null;  
       return (
           <div>
               <h3>Done</h3>
               {form}
+              {tasks}
           </div>
       );
         
@@ -54,13 +74,12 @@ class DoneList extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.auth.user.isAuthenticated,
-        
+        doneTasks: state.tasks.doneTasks
     };
   };
 
 const mapDispatchToProps = (dispatch) => ({
-    
-    
+    getTasks: (boardId, status) => dispatch(tasksActions.getTasks(boardId, status)),    
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DoneList);

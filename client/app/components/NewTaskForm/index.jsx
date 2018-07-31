@@ -66,7 +66,7 @@ const mapStateToProps = (state) => {
   };
 
 const mapDispatchToProps = (dispatch) => ({
-  writeTask: (data, status, id) => dispatch(actions.writeTask(data, status, id))
+  writeTask: (data, status, boardId) => dispatch(actions.writeTask(data, status, boardId))
 });
 
 export default connect(null, mapDispatchToProps)(NewTaskForm);
