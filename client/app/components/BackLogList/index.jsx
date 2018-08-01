@@ -50,7 +50,7 @@ class BackLogList extends React.Component {
                         status={this.state.status} 
                         boardId={this.props.boardId}
                     /> 
-                    : <button onClick={this.showNewTaskForm}>Add Task</button>;
+                    : <button onClick={this.showNewTaskForm} style={styles.btnAdd}>Add Task</button>;
       const tasks = this.props.backLogTasks !== 0 
                     ? this.props.backLogTasks.map(
                                                 (item) => 
@@ -60,8 +60,8 @@ class BackLogList extends React.Component {
                                                 )
                     : null;                                        
       return (
-          <div>
-              <h3>BackLog</h3>
+          <div style={styles.tasksList}>
+              <h3 style={styles.h3}>BackLog</h3>
               {form}
               {tasks}
           </div>

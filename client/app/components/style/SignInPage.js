@@ -13,10 +13,20 @@ export const formLogin = {
 };
 
 export const input = {
-    marginRight: '25%'
+    marginRight: '25%',
+    borderRadius: '5px',
+    backgroundColor: 'darkgoldenrod',
+    border: '0px'
 };
 
 export const btnLogin = {
     marginRight: '25%',
-    marginTop: '5%'
+    marginTop: '5%',
+    borderRadius: '5px',
+    backgroundColor: 'darkgoldenrod',
+    border: '0px'
+};
+
+export const link = {
+    textDecoration: 'none'
 }

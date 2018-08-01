@@ -57,13 +57,14 @@ class Home extends React.Component {
         
         return (
                 <div>
-                    <h1 style={styles.h1}>Trello</h1>
-                    <button onClick={this.logOut}>Log-out</button>
-                    <div id="sharing">
-                        <input />
-                        <button onClick={this.generateLink}>Generate Link</button>   
+                    <div style={styles.header}>
+                        <h1 style={styles.h1}>Trello</h1>
+                        <button onClick={this.logOut} style={styles.btnLogOut}>Log-out</button>    
                     </div>
-                    <br />
+                    <div style={styles.sharing}>
+                            <input style={styles.input} />
+                            <button onClick={this.generateLink} style={styles.btnGenLink}>Generate Link</button>   
+                    </div>
                     <BoardsContainer {...this.props}/>
                 </div> 
         );

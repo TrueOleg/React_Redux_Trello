@@ -43,13 +43,13 @@ class Board extends React.Component {
         
       
       return (
-          <div>
-              <h3>{this.props.board.title}</h3>
-              <React.Fragment>
+          <div style={styles.board}>
+              <h3 style={styles.boardTitle}>{this.props.board.title}</h3>
+              <div style={styles.boardTasksLists}>
                 <BackLogList boardId={this.props.board.id}/>
                 <ToDoList boardId={this.props.board.id}/>
                 <DoneList boardId={this.props.board.id}/>
-              </React.Fragment>  
+              </div>  
           </div>
       );
         

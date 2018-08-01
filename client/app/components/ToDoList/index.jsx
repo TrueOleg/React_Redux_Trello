@@ -50,7 +50,7 @@ class ToDoList extends React.Component {
                         status={this.state.status} 
                         boardId={this.props.boardId}
                     /> 
-                    : <button onClick={this.showNewTaskForm}>Add Task</button>;
+                    : <button onClick={this.showNewTaskForm} style={styles.btnAdd}>Add Task</button>;
         const tasks = this.props.toDoTasks !== 0 
                     ? this.props.toDoTasks.map(
                                                 (item) => 
@@ -60,8 +60,8 @@ class ToDoList extends React.Component {
                                                 )
                     : null;  
       return (
-          <div>
-              <h3>ToDo</h3>
+          <div style={styles.tasksList}>
+              <h3 style={styles.h3}>ToDo</h3>
               {form}
               {tasks}
           </div>

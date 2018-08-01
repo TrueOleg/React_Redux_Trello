@@ -45,24 +45,26 @@ class BoardsContainer extends React.Component {
         const form = this.state.isOpen ? <NewBoardForm hide={this.showNewBoardForm}/> : <button onClick={this.showNewBoardForm}>Add Board</button>;
         if (this.props.myBoards === 0) {
             return (
-                <div>
-                    <h2>List Boards</h2>
-                    <ul>
-                        <li>{form}</li>
-                    </ul>
+                <div style={styles.boardsCont}>
+                    <div style={styles.boardsList}>
+                        <h2 style={styles.h2}>List Boards</h2>
+                        <ul style={styles.ul}>
+                            <li style={styles.li}>{form}</li>
+                        </ul>
+                    </div>    
                 </div> 
             );    
         } else {
             return (
-                <div>
-                    <h2>List Boards</h2>
-                    <ul>
-                        <ListBoards boards={this.props.myBoards} {...this.props}/> 
-                        <li>{form}</li>
-                    </ul>
-                    
-                        <Route path="/boards" render={() => <Board board={this.props.location.state}/>}/>
-                    
+                <div style={styles.boardsCont}>
+                    <div style={styles.boardsList}>
+                        <h2 style={styles.h2}>List Boards</h2>
+                        <ul style={styles.ul}>
+                            <ListBoards boards={this.props.myBoards} {...this.props}/> 
+                            <li style={styles.li}>{form}</li>
+                        </ul>
+                    </div>    
+                    <Route path="/boards" render={() => <Board board={this.props.location.state}/>}/>    
                 </div> 
             );    
         }

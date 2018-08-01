@@ -12,10 +12,16 @@ export const form = {
 };
 
 export const input = {
-    marginRight: '25%'
+    marginRight: '25%',
+    borderRadius: '5px',
+    backgroundColor: 'darkgoldenrod',
+    border: '0px'
 };
 
 export const btn = {
     marginRight: '25%',
-    marginTop: '5%'
+    marginTop: '5%',
+    borderRadius: '5px',
+    backgroundColor: 'darkgoldenrod',
+    border: '0px'
 }

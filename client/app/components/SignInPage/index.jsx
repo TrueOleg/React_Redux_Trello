@@ -58,7 +58,7 @@ class SignInPage extends React.Component {
             value     = "Login"
             onClick={this.onSave}
           />
-          <Link to="/sign-up">Sign-up</Link> 
+          <Link to="/sign-up" style={styles.link}>Sign-up</Link> 
         </form>   
     );
   }

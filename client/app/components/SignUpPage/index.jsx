@@ -35,6 +35,7 @@ class SignUpPage extends React.Component {
           <h1>Sign-up</h1>
           <p>Enter login</p>
           <input
+            style = {styles.input}
             name  = "regLogin"
             label = "regLogin"
             value={this.state.credentials.regLogin}
@@ -43,6 +44,7 @@ class SignUpPage extends React.Component {
           <br />
           <p>Enter password</p>
           <input
+            style = {styles.input}
             name  = "regPass"
             label = "regPass"
             type  = "regPass"
@@ -52,6 +54,7 @@ class SignUpPage extends React.Component {
           <br />
           <p>Enter email</p>
           <input
+            style = {styles.input}
             name  = "regEmail"
             label = "regEmail"
             type  = "regEmail"

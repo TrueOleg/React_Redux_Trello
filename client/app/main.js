@@ -5,6 +5,7 @@ import { AppContainer } from 'react-hot-loader';
 import Root from './config/Root';
 
 const render = (Component) => {
+  // document.body.style.backgroundColor = "darkgoldenrod";
   ReactDOM.render(
     <AppContainer>
       <Component />

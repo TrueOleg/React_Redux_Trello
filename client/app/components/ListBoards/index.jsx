@@ -5,13 +5,15 @@ import {
   Link
 } from 'react-router-dom'; 
 import Board from '../Board';
+import * as styles from '../style/Home'; 
+
 
 const ListBoards = (props) => {
   
     const { boards } = props;
     const comp = boards.map( 
                     (item) => 
-                      <li key={item.id}><Link  to={{
+                      <li style={styles.li} key={item.id}><Link  to={{
                                                         pathname: '/boards',
                                                         search: `?id=${item.id}`, 
                                                         state: {...item}
@@ -21,12 +23,14 @@ const ListBoards = (props) => {
                                           </Link>
                       </li> );
     return (
-        <div>
-            <ul>
+        // <div style={styles.list}>
+        //     <ul>
+            <React.Fragment>
                 {comp}
-            </ul>
+            </React.Fragment>    
+        //     </ul>
             
-        </div>
+        // </div>
     );
 };
 
