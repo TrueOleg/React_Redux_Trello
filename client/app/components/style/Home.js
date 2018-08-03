@@ -64,6 +64,8 @@ export const btnGenLink = {
   borderRadius: '5px',
   border: '0px',
   cursor: 'pointer',
+  marginTop: '5px',
+  marginBottom: '5px',
 };
 
 export const btnAdd = {
@@ -74,6 +76,7 @@ export const btnAdd = {
 
 export const boardsCont = {
   backgroundColor: 'deepskyblue',
+  height: '860px',
   width: '100%',
   display: 'flex',
 };
@@ -118,4 +121,25 @@ export const tasksList = {
   border: '0px',
   borderRadius: '10px',
   overflow: 'hidden',
+};
+
+export const task = {
+  width: '97%',
+  marginLeft: '1%',
+  marginRight: '1%',
+  marginBottom: '5px',
+  paddingTop: '1px',
+  paddingBottom: '1px',
+  backgroundColor: 'rgb(137, 181, 226)',
+  border: '0px',
+  borderRadius: '10px'
+};
+
+export const form = {
+  position: 'fixed',
+  left: '44%',
+  backgroundColor: 'cornflowerblue',
+  width: '15%',
+  border: '0px',
+  borderRadius: '10px'
 };

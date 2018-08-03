@@ -26,11 +26,17 @@ class BoardsContainer extends React.Component {
             isOpen: false
         };
         this.showNewBoardForm = this.showNewBoardForm.bind(this);
+        this.hideForm = this.hideForm.bind(this);
     }
 
     componentDidMount() {
-       this.props.getBoards();
-        
+        this.props.getBoards();
+    }
+    
+    hideForm() {
+        this.setState({
+        isOpen: false
+        });
     }
 
     showNewBoardForm(event) {
@@ -42,7 +48,12 @@ class BoardsContainer extends React.Component {
     
     render () {
         
-        const form = this.state.isOpen ? <NewBoardForm hide={this.showNewBoardForm}/> : <button onClick={this.showNewBoardForm}>Add Board</button>;
+        const form = this.state.isOpen 
+                     ? <NewBoardForm  
+                        hideForm={this.hideForm} 
+                        hide={this.showNewBoardForm}/> 
+                     : <button onClick={this.showNewBoardForm}>Add Board</button>;
+
         if (this.props.myBoards === 0) {
             return (
                 <div style={styles.boardsCont}>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import User from '../User';
 import * as actions from '../../redux/actions/boardsActions'; 
+import * as styles from '../style/Home'; 
 
 
 class NewBoardForm extends React.Component {
@@ -14,6 +15,19 @@ class NewBoardForm extends React.Component {
       };
     this.addBoard = this.addBoard.bind(this);
     this.onChange = this.onChange.bind(this);
+  }
+
+  componentDidMount() {
+    
+    document.addEventListener('click', (e) => {this.hideList(e)});
+    this.form = document.getElementById('form'); 
+  }
+
+  hideList(e) {
+    const form = this.form;
+    if (form && !form.contains(e.target)) {
+        this.props.hideForm();
+      }
   }
 
   onChange(event) {
@@ -32,22 +46,24 @@ class NewBoardForm extends React.Component {
 
   render() {
     return (
-      <form>
-      <h1>New Board</h1>
-      <p>Enter title</p>
-      <input
-        name="title"
-        label="title"
-        value={this.state.newBoard.title}
-        onChange={this.onChange}
-        />
-      <br />
-      <input
-        type="submit"
-        className="btn btn-primary"
-        value="Create"
-        onClick={this.addBoard}
-        />
+      <form style={styles.form} id='form'>
+        <h1>New Board</h1>
+        <p>Enter title</p>
+        <input
+          style={styles.input}
+          name="title"
+          label="title"
+          value={this.state.newBoard.title}
+          onChange={this.onChange}
+          />
+        <br />
+        <input
+          style={styles.btnGenLink}
+          type="submit"
+          className="btn btn-primary"
+          value="Create"
+          onClick={this.addBoard}
+          />
     </form>  
     )
       

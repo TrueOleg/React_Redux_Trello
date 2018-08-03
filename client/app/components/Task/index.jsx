@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../redux/actions/postsAction';
 import ListPosts from '../ListPosts';
+import * as styles from '../style/Home'; 
 
 
 class Task extends React.Component {
@@ -14,7 +15,7 @@ class Task extends React.Component {
         
         
             return (
-                <div>
+                <div style={styles.task}>
                   <p>{this.props.task.title}</p>
                   <p>{this.props.task.content}</p>
                 </div>  

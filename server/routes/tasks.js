@@ -9,14 +9,9 @@ const Op = sequelize.Op;
 
 router.post('/', verify, async (req, res, next) => {
     try {
-      console.log('body', req.body)
+      
         const {title, content} = req.body.data;
         const {status, boardId} = req.body;
-        console.log('title', title)
-        console.log('content', content)
-        console.log('status', status)
-        console.log('boardId', boardId)
-        // const userId = req._userId;
         const save = await models.Tasks
                 .build({ 
                   title: title,
@@ -24,11 +19,7 @@ router.post('/', verify, async (req, res, next) => {
                   board_id: boardId, 
                   status: status 
                 })
-                .save();
-        // const boards = await  models.Boards.findAll({
-        //   attributes: ['id', 'title'], 
-        //   where: {user_id: userId}, raw: true
-        //   });    
+                .save();  
            
         res.status(200).send({
             message: 'success',
@@ -53,29 +44,42 @@ router.get('/my', verify, async (req, res, next) => {
             },
             raw: true
         });
-        console.log('tasks', tasks)
+        
         res.status(200).send({
             message: 'success',
             result: true,
             tasks
         });
-        // const userId = req._userId;
-        // const boards = await models.Boards.findAll({
-        //     attributes: ['id', 'title'], 
-        //     where: {user_id: userId}, raw: true
-        // });
-        // res.status(200).send({
-        //     message: 'success',
-        //     result: true,
-        //     boards
-        // });
+       
     } 
     catch(err) {
         next(new Error(err.message));
     }      
 }); 
 
-
+router.post('/my', verify, async (req, res, next) => {
+    try {
+      
+        
+        const {status, taskId} = req.body;
+        const change = await models.Tasks
+                .findOne({ 
+                    where: { id: taskId }
+                })
+                .then(task => {
+                    task.update({ status: status}, {fields: ['status']})
+                })  
+           
+        res.status(200).send({
+            message: 'success',
+            result: true,
+            
+        });        
+    } 
+    catch(err) {
+        next(new Error(err.message));
+    }   
+});  
 
 
 module.exports = router;

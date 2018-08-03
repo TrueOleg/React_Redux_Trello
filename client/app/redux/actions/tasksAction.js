@@ -65,3 +65,26 @@ export const writeTask = (data, status, boardId) => {
                 
     };
 };
+
+export const changeTask = (boardId, taskId, status) => {
+    return (dispatch) => {
+ 
+        Api.post(`${Const.URL}/tasks/my`, {taskId, status})
+            .then(res => {
+              
+                dispatch(getTasks(boardId, 'backLog'));
+            })
+            .then(res => {
+                dispatch(getTasks(boardId, 'todo'));
+
+            })
+            .then(res => {
+                dispatch(getTasks(boardId, 'done'));
+
+            })
+            .catch(() => dispatch(loginHasErrored(true)));
+            
+        
+                
+    };
+};

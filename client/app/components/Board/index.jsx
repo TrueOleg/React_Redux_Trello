@@ -6,6 +6,7 @@ import {
     Route,
     Link
   } from 'react-router-dom';  
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import * as styles from '../style/Home'; 
 import * as Token from '../../servises/Token';
@@ -31,12 +32,31 @@ class Board extends React.Component {
         
     }
 
-    componentDidMount() {
-        // this.props.getTasks();
-        
+    getAllTasks(boardId) {
+        this.props.getTasks(boardId, 'backLog');
+        this.props.getTasks(boardId, 'todo');
+        this.props.getTasks(boardId, 'done');
     }
 
-    
+    componentDidMount() {
+        this.getAllTasks(this.props.board.id)
+    }
+
+    onDragEnd = result => {
+        console.log('result', result);
+        const { draggableId, source, destination } = result;
+
+       
+        if (!destination) {
+            return;
+        }
+
+        if (source.droppableId !== destination.droppableId) {
+            this.props.changeTask(this.props.board.id, draggableId, destination.droppableId);
+            
+        }
+        
+    };
     
     
     render () {
@@ -46,9 +66,11 @@ class Board extends React.Component {
           <div style={styles.board}>
               <h3 style={styles.boardTitle}>{this.props.board.title}</h3>
               <div style={styles.boardTasksLists}>
-                <BackLogList boardId={this.props.board.id}/>
-                <ToDoList boardId={this.props.board.id}/>
-                <DoneList boardId={this.props.board.id}/>
+                <DragDropContext onDragEnd={this.onDragEnd}>
+                    <BackLogList boardId={this.props.board.id}/>
+                    <ToDoList boardId={this.props.board.id}/>
+                    <DoneList boardId={this.props.board.id}/>
+                </DragDropContext>
               </div>  
           </div>
       );
@@ -65,9 +87,8 @@ const mapStateToProps = (state) => {
   };
 
 const mapDispatchToProps = (dispatch) => ({
-    // getTasks: () => dispatch(tasksActions.getTasks()),
-
-    
+    getTasks: (boardId, status) => dispatch(tasksActions.getTasks(boardId, status)),
+    changeTask: (boardId, taskId, status) => dispatch(tasksActions.changeTask(boardId, taskId, status))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);

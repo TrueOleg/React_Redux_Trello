@@ -38,6 +38,7 @@
     "debounce-action": "^0.1.0",
     "prop-types": "^15.6.1",
     "react": "16.4.0",
+    "react-beautiful-dnd": "^8.0.7",
     "react-dom": "16.4.0",
     "react-hot-loader": "4.2.0",
     "react-redux": "^5.0.7",

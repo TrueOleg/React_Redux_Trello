@@ -6,6 +6,7 @@ import {
     Route,
     Link
   } from 'react-router-dom';  
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import * as styles from '../style/Home'; 
 
@@ -23,6 +24,7 @@ class BackLogList extends React.Component {
            status: 'backLog'
         };
         this.showNewTaskForm = this.showNewTaskForm.bind(this);
+        this.hideForm = this.hideForm.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -32,20 +34,30 @@ class BackLogList extends React.Component {
     }
     
     componentDidMount() {
-        this.props.getTasks(this.props.boardId, this.state.status);
+        // this.props.getTasks(this.props.boardId, this.state.status);
+    }
+
+    hideForm() {
+        this.setState({
+        isOpen: false
+        });
     }
 
     showNewTaskForm(event) {
         event.preventDefault();
         
-        this.setState({ isOpen: !this.state.isOpen});
+        this.setState({ isOpen: true});
     }
-    
+
+    onDragEnd = result => {
+        
+    };
     
     render () {
         
       const form =  this.state.isOpen 
                     ? <NewTaskForm 
+                        hideForm={this.hideForm}
                         hide={this.showNewTaskForm} 
                         status={this.state.status} 
                         boardId={this.props.boardId}
@@ -53,18 +65,36 @@ class BackLogList extends React.Component {
                     : <button onClick={this.showNewTaskForm} style={styles.btnAdd}>Add Task</button>;
       const tasks = this.props.backLogTasks !== 0 
                     ? this.props.backLogTasks.map(
-                                                (item) => 
-                                                <li key={item.id}>
-                                                    <Task task={item} />
-                                                </li>
+                                                (item, index) => 
+                                                <Draggable  
+                                                    key={item.id}
+                                                    draggableId={item.id}
+                                                    index={index}
+                                                >
+                                                    {(provided, snapshot) => (
+                                                        <li key={item.id} 
+                                                            style={styles.li} 
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                        >
+                                                            <Task task={item} />
+                                                        </li>
+                                                    )}
+                                                </Draggable>
                                                 )
                     : null;                                        
       return (
-          <div style={styles.tasksList}>
-              <h3 style={styles.h3}>BackLog</h3>
-              {form}
-              {tasks}
-          </div>
+          <Droppable droppableId={this.state.status}>
+              {(provided, snapshot) => (
+                <div style={styles.tasksList} ref={provided.innerRef}>
+                    <h3 style={styles.h3}>BackLog</h3>
+                    {form}
+                    {tasks} 
+                    {provided.placeholder}   
+                </div>
+              )}
+          </Droppable>
       );
         
     }
