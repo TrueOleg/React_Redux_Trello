@@ -7,21 +7,27 @@ export const h1 = {
 };
 
 export const h2 = {
-  textAlign: 'center',
+  paddingTop: '10px',
+  paddingLeft: '10px',
+  paddingBottom: '10px',
+  fontWeight: 'bold',
 };
 
 export const h3 = {
   textAlign: 'center',
-  backgroundColor: 'cornflowerblue',
+  color: '#fff',
   margin: '0',
   paddingTop: '15px',
   paddingBottom: '15px',
   
 };
 
-export const ul = {
+export const list = {
   marginLeft: '0',
   paddingLeft: '0',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
 };
 
 export const li = {
@@ -32,14 +38,14 @@ export const li = {
 export const header = {
   width: '100%',
   display: 'flex',
-  backgroundColor: 'cornflowerblue',
+  backgroundColor: 'rgba(0,0,0,.15)',
   justifyContent: 'space-between',
 };
 
 export const btnLogOut = {
   border: '0px',
   borderRadius: '5px',
-  backgroundColor: 'deepskyblue',
+  backgroundColor: 'hsla(0,0%,100%,.3)',
   color: 'white',
   marginTop: '5px',
   marginRight: '5px',
@@ -48,37 +54,81 @@ export const btnLogOut = {
 };
 
 export const sharing = {
-  backgroundColor: 'deepskyblue',
   width: '100%',
   textAlign: 'center',
   paddingTop: '5px',
   paddingBottom: '5px',
 };
 
-export const input = {
+export const inputSharing = {
   border: '0px',
   borderRadius: '5px',
+  backgroundColor: 'hsla(0,0%,100%,.3)',
+  height: '24px',
+  marginBottom: '5px',
+  width: '25%',
+  paddingLeft: '5px',
+};
+
+export const inputForm = {
+  border: '0px',
+  borderRadius: '5px',
+  backgroundColor: '#fff',
+  height: '24px',
+  marginBottom: '5px',
+  width: '98%',
+  paddingLeft: '5px',
 };
 
 export const btnGenLink = {
   borderRadius: '5px',
   border: '0px',
   cursor: 'pointer',
-  marginTop: '5px',
-  marginBottom: '5px',
+  backgroundColor: 'rgba(255, 255, 255, 0.3)',
+  color: 'white',
+  height: '26px',
+  marginLeft: '5px',
 };
 
 export const btnAdd = {
-  borderRadius: '5px',
   border: '0px',
   cursor: 'pointer',
+  backgroundColor: 'rgba(255, 255, 255)',
+  width: '95%',
+  fontSize: '16px',
+  textAlign: 'start',
+  marginBottom: '5px',
+};
+
+export const btnAddBoard = {
+  border: '0px',
+  borderRadius: '5px',
+  color: '#fff',
+  cursor: 'pointer',
+  backgroundColor: 'rgb(90, 172, 68)',
+  width: '89%',
+  fontSize: '16px',
+  textAlign: 'start',
+  marginBottom: '5px',
+};
+
+export const btnAddTask = {
+  border: '0px',
+  borderRadius: '5px',
+  color: '#fff',
+  cursor: 'pointer',
+  backgroundColor: 'rgb(90, 172, 68)',
+  width: '89%',
+  fontSize: '16px',
+  textAlign: 'start',
+  marginBottom: '5px',
 };
 
 export const boardsCont = {
-  backgroundColor: 'deepskyblue',
   height: '860px',
   width: '100%',
   display: 'flex',
+  alignItems: 'flex-start'
 };
 
 export const boardsList = {
@@ -86,23 +136,44 @@ export const boardsList = {
   marginLeft: '1%',
   marginRight: '5%',
   marginBottom: '5px',
-  backgroundColor: '#fff',
+  marginTop: '5px',
+  backgroundColor: '#e2e4e6',
   border: '0px',
-  borderRadius: '10px'
+  borderRadius: '3px',
+  display: 'flex',
+  flexDirection: 'column'
 };
+
+export const linkBoard = {
+  width: '92%',
+  backgroundColor: '#fff',
+  fontSize: '20px',
+  borderRadius: '3px',
+  boxShadow: '0 1px 0 #ccc',
+  color: '#444',
+  cursor: 'pointer',
+  display: 'block',
+  marginBottom: '8px',
+  paddingLeft: '5px',
+  position: 'relative',
+  textDecoration: 'none',
+  zIndex: '0',
+};
+
+
 
 export const board = {
   width: '75%',
   marginLeft: '1%',
   marginRight: '5%',
   marginBottom: '5px',
-  backgroundColor: 'dodgerblue',
   border: '0px',
   borderRadius: '10px'
 };
 
 export const boardTitle = {
   textAlign: 'center',
+  color: '#fff'
 };
 
 export const boardTasksLists = {
@@ -117,7 +188,7 @@ export const tasksList = {
   marginLeft: '1%',
   marginRight: '1%',
   marginBottom: '5px',
-  backgroundColor: '#fff',
+  backgroundColor: 'rgb(226, 228, 230)',
   border: '0px',
   borderRadius: '10px',
   overflow: 'hidden',
@@ -130,16 +201,19 @@ export const task = {
   marginBottom: '5px',
   paddingTop: '1px',
   paddingBottom: '1px',
-  backgroundColor: 'rgb(137, 181, 226)',
+  backgroundColor: 'rgb(255, 255, 255)',
   border: '0px',
   borderRadius: '10px'
 };
 
 export const form = {
-  position: 'fixed',
-  left: '44%',
-  backgroundColor: 'cornflowerblue',
-  width: '15%',
-  border: '0px',
-  borderRadius: '10px'
+  width: '94%'
+};
+
+export const close = {
+  cursor: 'pointer',
+  position: 'absolute',
+  top: '7px',
+  right: '7px',
+  
 };

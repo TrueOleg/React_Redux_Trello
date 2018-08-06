@@ -27,11 +27,11 @@ class ToDoList extends React.Component {
         this.hideForm = this.hideForm.bind(this);
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.boardId !== prevProps.boardId) {
-            this.props.getTasks(this.props.boardId, this.state.status);
-          }
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (this.props.boardId !== prevProps.boardId) {
+    //         this.props.getTasks(this.props.boardId, this.state.status);
+    //       }
+    // }
     
     componentDidMount() {
         // this.props.getTasks(this.props.boardId, this.state.status);
@@ -71,15 +71,15 @@ class ToDoList extends React.Component {
                                                     index={index}
                                                 >
                                                     {(provided, snapshot) => (
-                                                        <li 
+                                                        <div 
                                                             key={item.id} 
-                                                            style={styles.li} 
+                                                            style={styles.task} 
                                                             ref={provided.innerRef}
                                                             {...provided.draggableProps}
                                                             {...provided.dragHandleProps}
                                                         >
                                                             <Task task={item} />
-                                                        </li>
+                                                        </div>
                                                     )}
                                                 </Draggable>
                                             )
@@ -88,9 +88,9 @@ class ToDoList extends React.Component {
           <Droppable droppableId={this.state.status}>
               {(provided, snapshot) => (
                 <div ref={provided.innerRef} style={styles.tasksList}>
-                    <h3 style={styles.h3}>ToDo</h3>
-                    {form}
+                    <div style={styles.h2}>ToDo</div>
                     {tasks}
+                    {form}
                     {provided.placeholder}   
                 </div>
               )}

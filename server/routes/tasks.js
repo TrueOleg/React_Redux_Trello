@@ -57,11 +57,11 @@ router.get('/my', verify, async (req, res, next) => {
     }      
 }); 
 
-router.post('/my', verify, async (req, res, next) => {
+router.put('/my', verify, async (req, res, next) => {
     try {
       
         
-        const {status, taskId} = req.body;
+        const {status, taskId, boardId} = req.body;
         const change = await models.Tasks
                 .findOne({ 
                     where: { id: taskId }
@@ -69,11 +69,33 @@ router.post('/my', verify, async (req, res, next) => {
                 .then(task => {
                     task.update({ status: status}, {fields: ['status']})
                 })  
-           
+        const backLogTasks = await models.Tasks.findAll({
+                    where: {
+                        board_id: boardId,
+                        status: 'backLog'
+                    },
+                    raw: true
+                });  
+        const todoTasks = await models.Tasks.findAll({
+                    where: {
+                        board_id: boardId,
+                        status: 'todo'
+                    },
+                    raw: true
+                }); 
+        const doneTasks = await models.Tasks.findAll({
+                    where: {
+                        board_id: boardId,
+                        status: 'done'
+                    },
+                    raw: true
+                });          
         res.status(200).send({
             message: 'success',
             result: true,
-            
+            backLogTasks,
+            todoTasks,
+            doneTasks
         });        
     } 
     catch(err) {

@@ -52,16 +52,16 @@ class BoardsContainer extends React.Component {
                      ? <NewBoardForm  
                         hideForm={this.hideForm} 
                         hide={this.showNewBoardForm}/> 
-                     : <button onClick={this.showNewBoardForm}>Add Board</button>;
+                     : <button onClick={this.showNewBoardForm} style={styles.btnAdd}>+ Add Board</button>;
 
         if (this.props.myBoards === 0) {
             return (
                 <div style={styles.boardsCont}>
                     <div style={styles.boardsList}>
-                        <h2 style={styles.h2}>List Boards</h2>
-                        <ul style={styles.ul}>
-                            <li style={styles.li}>{form}</li>
-                        </ul>
+                        <div style={styles.h2}>List Boards</div>
+                        <div style={styles.list}>
+                            {form}
+                        </div>
                     </div>    
                 </div> 
             );    
@@ -69,11 +69,11 @@ class BoardsContainer extends React.Component {
             return (
                 <div style={styles.boardsCont}>
                     <div style={styles.boardsList}>
-                        <h2 style={styles.h2}>List Boards</h2>
-                        <ul style={styles.ul}>
+                        <div style={styles.h2}>List Boards</div>
+                        <div style={styles.list}>
                             <ListBoards boards={this.props.myBoards} {...this.props}/> 
-                            <li style={styles.li}>{form}</li>
-                        </ul>
+                            {form}
+                        </div>
                     </div>    
                     <Route path="/boards" render={() => <Board board={this.props.location.state}/>}/>    
                 </div> 

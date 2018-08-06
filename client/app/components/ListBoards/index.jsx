@@ -12,25 +12,24 @@ const ListBoards = (props) => {
   
     const { boards } = props;
     const comp = boards.map( 
-                    (item) => 
-                      <li style={styles.li} key={item.id}><Link  to={{
-                                                        pathname: '/boards',
-                                                        search: `?id=${item.id}`, 
-                                                        state: {...item}
-                                                      }}
-                                          >
-                                          {item.title}
-                                          </Link>
-                      </li> );
+                    (item) =>   <Link  
+                                    style={styles.linkBoard}
+                                    key={item.id}
+                                    to={{
+                                        pathname: '/boards',
+                                        search: `?id=${item.id}`, 
+                                        state: {...item}
+                                        }}
+                                >
+                                {item.title}
+                                </Link>
+                      );
     return (
-        // <div style={styles.list}>
-        //     <ul>
+        
             <React.Fragment>
                 {comp}
             </React.Fragment>    
-        //     </ul>
-            
-        // </div>
+        
     );
 };
 

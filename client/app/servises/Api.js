@@ -36,9 +36,9 @@ export function authenticate () {
       return axios.delete(url, options);
     };
       
-    export function put(url, options = {}) {
+    export function put(url, data, options = {}) {
       this.headers(options, 'PUT');
-      return axios.put(url, options);
+      return axios.put(url, data, options);
     };
   
 

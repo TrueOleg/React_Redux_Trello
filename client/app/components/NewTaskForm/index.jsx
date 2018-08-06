@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import User from '../User';
 import * as actions from '../../redux/actions/tasksAction'; 
 import * as styles from '../style/Home'; 
+import close from '../../img/cross-script.png';
 
 
 class NewTaskForm extends React.Component {
@@ -15,18 +16,18 @@ class NewTaskForm extends React.Component {
       };
     this.addTask = this.addTask.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.hideList = this.hideList.bind(this);
   }
 
   componentDidMount() {
-    document.addEventListener('click', (e) => {this.hideList(e)});
-    this.form = document.getElementById('formTask'); 
+    
   }
   
-  hideList(e) {
-    const form = this.form;
-    if (form && !form.contains(e.target)) {
-        this.props.hideForm();
-      }
+  hideList(event) {
+    
+    event.preventDefault();
+    this.setState({ newTask: {title: '', content: ''}});
+    this.props.hideForm();
   }
 
   onChange(event) {
@@ -47,32 +48,38 @@ class NewTaskForm extends React.Component {
   render() {
     return (
     <form style={styles.form} id='formTask'>
-      <h1>New Task</h1>
-      <p>Enter title</p>
       <input
-        style={styles.input}
+        style={styles.inputForm}
         name="title"
         label="title"
+        placeholder="enter title"
         value={this.state.newTask.title}
         onChange={this.onChange}
         />
       <br />
-      <p>Enter content</p>
       <input
-        style={styles.input}
+        style={styles.inputForm}
         name="content"
         label="content"
+        placeholder="enter content"
         value={this.state.newTask.content}
         onChange={this.onChange}
         />
       <br />
       <input
-        style={styles.btnGenLink}
+        style={styles.btnAddTask}
         type="submit"
         className="btn btn-primary"
-        value="Create"
+        value="+Add Task"
         onClick={this.addTask}
         />
+      <input
+          style={styles.btnGenLink}
+          type="submit"
+          className="btn btn-primary"
+          value='✖'
+          onClick={this.hideList}
+          />    
     </form>  
     )
       

@@ -4,21 +4,21 @@ import * as Const from '../constants';
 export const saveMyBackLogTasks = (tasks) => {
   return {
       type: Const.SAVE_MY_BACKLOG_TASKS,
-      tasks
+      tasks: tasks
   };
 };  
 
 export const saveMyDoneTasks = (tasks) => {
     return {
         type: Const.SAVE_MY_DONE_TASKS,
-        tasks
+        tasks: tasks
     };
 };  
 
 export const saveMyToDoTasks = (tasks) => {
     return {
         type: Const.SAVE_MY_TODO_TASKS,
-        tasks
+        tasks: tasks
     };
 };  
 
@@ -56,8 +56,16 @@ export const writeTask = (data, status, boardId) => {
  
         Api.post(`${Const.URL}/tasks/`, {data, status, boardId})
             .then(res => {
-              dispatch(getTasks(boardId, status ));
+              dispatch(getTasks(boardId, 'backLog' ));
                 
+            })
+            .then(res => {
+                dispatch(getTasks(boardId, 'done' ));
+                  
+            })
+            .then(res => {
+                dispatch(getTasks(boardId, 'todo' ));
+                  
             })
             .catch(() => dispatch(loginHasErrored(true)));
             
@@ -69,17 +77,12 @@ export const writeTask = (data, status, boardId) => {
 export const changeTask = (boardId, taskId, status) => {
     return (dispatch) => {
  
-        Api.post(`${Const.URL}/tasks/my`, {taskId, status})
+        Api.put(`${Const.URL}/tasks/my`, {taskId, status, boardId})
             .then(res => {
-              
-                dispatch(getTasks(boardId, 'backLog'));
-            })
-            .then(res => {
-                dispatch(getTasks(boardId, 'todo'));
-
-            })
-            .then(res => {
-                dispatch(getTasks(boardId, 'done'));
+              const {backLogTasks, doneTasks, todoTasks} = res.data;
+                dispatch(saveMyBackLogTasks(backLogTasks));
+                dispatch(saveMyDoneTasks(doneTasks));
+                dispatch(saveMyToDoTasks(todoTasks));
 
             })
             .catch(() => dispatch(loginHasErrored(true)));

@@ -27,11 +27,11 @@ class BackLogList extends React.Component {
         this.hideForm = this.hideForm.bind(this);
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.boardId !== prevProps.boardId) {
-            this.props.getTasks(this.props.boardId, this.state.status);
-          }
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (this.props.boardId !== prevProps.boardId) {
+    //         this.props.getTasks(this.props.boardId, this.state.status);
+    //       }
+    // }
     
     componentDidMount() {
         // this.props.getTasks(this.props.boardId, this.state.status);
@@ -44,7 +44,7 @@ class BackLogList extends React.Component {
     }
 
     showNewTaskForm(event) {
-        event.preventDefault();
+        // event.preventDefault();
         
         this.setState({ isOpen: true});
     }
@@ -70,16 +70,17 @@ class BackLogList extends React.Component {
                                                     key={item.id}
                                                     draggableId={item.id}
                                                     index={index}
+                                                     
                                                 >
                                                     {(provided, snapshot) => (
-                                                        <li key={item.id} 
-                                                            style={styles.li} 
+                                                        <div key={item.id} 
+                                                            style={styles.task}
                                                             ref={provided.innerRef}
                                                             {...provided.draggableProps}
                                                             {...provided.dragHandleProps}
                                                         >
                                                             <Task task={item} />
-                                                        </li>
+                                                        </div>
                                                     )}
                                                 </Draggable>
                                                 )
@@ -88,9 +89,9 @@ class BackLogList extends React.Component {
           <Droppable droppableId={this.state.status}>
               {(provided, snapshot) => (
                 <div style={styles.tasksList} ref={provided.innerRef}>
-                    <h3 style={styles.h3}>BackLog</h3>
-                    {form}
+                    <div style={styles.h2}>BackLog</div>
                     {tasks} 
+                    {form}
                     {provided.placeholder}   
                 </div>
               )}
