@@ -62,13 +62,16 @@ router.put('/my', verify, async (req, res, next) => {
       
         
         const {status, taskId, boardId} = req.body;
-        const change = await models.Tasks
+        let change = await models.Tasks
                 .findOne({ 
-                    where: { id: taskId }
+                    where: { id: taskId } 
                 })
                 .then(task => {
-                    task.update({ status: status}, {fields: ['status']})
+                    console.log('task', task)        
+
+                    return task.update({ status: status}, {fields: ['status']})
                 })  
+        console.log('change', change)        
         const backLogTasks = await models.Tasks.findAll({
                     where: {
                         board_id: boardId,
