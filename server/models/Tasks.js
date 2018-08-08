@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
       status: {
         type: DataTypes.TEXT,
       },
+      position: {
+        type: DataTypes.BIGINT,
+      },
     });
   
     Tasks.associate = function (models) {

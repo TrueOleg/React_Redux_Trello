@@ -39,7 +39,8 @@ class NewTaskForm extends React.Component {
 
   addTask(event) {
     event.preventDefault();
-    this.props.writeTask(this.state.newTask, this.props.status, this.props.boardId);
+    const position = (this.props.lastPosition + 1000);
+    this.props.writeTask(this.state.newTask, this.props.status, this.props.boardId, position);
     this.setState({ newTask: {title: '', content: ''}});
     this.props.hideForm();
   }
@@ -90,7 +91,7 @@ const mapStateToProps = (state) => {
   };
 
 const mapDispatchToProps = (dispatch) => ({
-  writeTask: (data, status, boardId) => dispatch(actions.writeTask(data, status, boardId))
+  writeTask: (data, status, boardId, position) => dispatch(actions.writeTask(data, status, boardId, position))
 });
 
 export default connect(null, mapDispatchToProps)(NewTaskForm);

@@ -21,25 +21,34 @@ class BackLogList extends React.Component {
         super(props);
         this.state = {
            isOpen: false, 
-           status: 'backLog'
+           status: 'backLog',
+           lastPosition: 0
         };
         this.showNewTaskForm = this.showNewTaskForm.bind(this);
         this.hideForm = this.hideForm.bind(this);
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (this.props.boardId !== prevProps.boardId) {
-    //         this.props.getTasks(this.props.boardId, this.state.status);
-    //       }
-    // }
+    componentDidUpdate(prevProps) {
+        if (prevProps !== this.props) {
+            if (this.props.backLogTasks.length !== 0) {
+                const last = this.props.backLogTasks.length;
+                const lastTask = this.props.backLogTasks[last-1];
+                const lastPos = +lastTask.position;
+                this.setState({
+                    lastPosition: lastPos
+                });
+            }
+        }
+        
+    }
     
     componentDidMount() {
-        // this.props.getTasks(this.props.boardId, this.state.status);
+        
     }
 
     hideForm() {
         this.setState({
-        isOpen: false
+            isOpen: false
         });
     }
 
@@ -61,6 +70,7 @@ class BackLogList extends React.Component {
                         hide={this.showNewTaskForm} 
                         status={this.state.status} 
                         boardId={this.props.boardId}
+                        lastPosition={this.state.lastPosition}
                     /> 
                     : <button onClick={this.showNewTaskForm} style={styles.btnAdd}>Add Task</button>;
       const tasks = this.props.backLogTasks !== 0 
@@ -70,7 +80,6 @@ class BackLogList extends React.Component {
                                                     key={item.id}
                                                     draggableId={item.id}
                                                     index={index}
-                                                     
                                                 >
                                                     {(provided, snapshot) => (
                                                         <div key={item.id} 

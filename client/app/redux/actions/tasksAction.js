@@ -51,10 +51,10 @@ export const getTasks = (boardId, status) => {
     };
 };
 
-export const writeTask = (data, status, boardId) => {
+export const writeTask = (data, status, boardId, position) => {
     return (dispatch) => {
  
-        Api.post(`${Const.URL}/tasks/`, {data, status, boardId})
+        Api.post(`${Const.URL}/tasks/`, {data, status, boardId, position})
             .then(res => {
               dispatch(getTasks(boardId, 'backLog' ));
                 
@@ -74,15 +74,26 @@ export const writeTask = (data, status, boardId) => {
     };
 };
 
-export const changeTask = (boardId, taskId, status) => {
+export const changeTask = (boardId, taskId, status, position) => {
     return (dispatch) => {
  
-        Api.put(`${Const.URL}/tasks/my`, {taskId, status, boardId})
+        Api.put(`${Const.URL}/tasks/my`, {taskId, status, boardId, position})
             .then(res => {
               const {backLogTasks, doneTasks, todoTasks} = res.data;
-                dispatch(saveMyBackLogTasks(backLogTasks));
-                dispatch(saveMyDoneTasks(doneTasks));
-                dispatch(saveMyToDoTasks(todoTasks));
+
+              backLogTasks.sort(function(a, b) {
+                return a.position - b.position;
+              });
+              doneTasks.sort(function(a, b) {
+                return a.position - b.position;
+              });
+              todoTasks.sort(function(a, b) {
+                return a.position - b.position;
+              });
+
+              dispatch(saveMyBackLogTasks(backLogTasks));
+              dispatch(saveMyDoneTasks(doneTasks));
+              dispatch(saveMyToDoTasks(todoTasks));
 
             })
             .catch(() => dispatch(loginHasErrored(true)));

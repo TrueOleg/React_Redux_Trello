@@ -42,19 +42,42 @@ class Board extends React.Component {
         this.getAllTasks(this.props.board.id)
     }
 
-    onDragEnd = result => {
+    onDragEnd = (result, index) => {
         console.log('result', result);
-        const { draggableId, source, destination } = result;
-
+        const { draggableId, source, destination} = result;
+        
        
         if (!destination) {
             return;
         }
+        if (source.droppableId === destination.droppableId 
+            && source.index === destination.index) {
+                return;
+        }        
+        if ((source.droppableId === destination.droppableId && source.index !== destination.index)
+            ||(source.droppableId !== destination.droppableId && source.index !== destination.index)
+            ||(source.droppableId !== destination.droppableId && source.index === destination.index)) {
+            const newIndex = destination.index;
+            
+            let newPosition;
+            switch (destination.droppableId) {
+                case 'backLog': newPosition = this.props.myTasks.backLogTasks[newIndex].position-1;
+                                break;
+                case 'todo': newPosition = this.props.myTasks.toDoTasks[newIndex].position-1;
+                                break;
+                case 'done': newPosition = this.props.myTasks.doneTasks[newIndex].position-1;
+                                break;                                
 
-        if (source.droppableId !== destination.droppableId) {
-            this.props.changeTask(this.props.board.id, draggableId, destination.droppableId);
+            }
+            this.props.changeTask(this.props.board.id, draggableId, destination.droppableId, newPosition);
+
             
         }
+        
+        // if (source.droppableId !== destination.droppableId) {
+        //     this.props.changeTask(this.props.board.id, draggableId, destination.droppableId);
+            
+        // }
         
     };
     
@@ -82,13 +105,13 @@ class Board extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.auth.user.isAuthenticated,
-        // myTasks: state.tasks.myTasks
+        myTasks: state.tasks
     };
   };
 
 const mapDispatchToProps = (dispatch) => ({
     getTasks: (boardId, status) => dispatch(tasksActions.getTasks(boardId, status)),
-    changeTask: (boardId, taskId, status) => dispatch(tasksActions.changeTask(boardId, taskId, status))
+    changeTask: (boardId, taskId, status, position) => dispatch(tasksActions.changeTask(boardId, taskId, status, position))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);

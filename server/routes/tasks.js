@@ -11,13 +11,14 @@ router.post('/', verify, async (req, res, next) => {
     try {
       
         const {title, content} = req.body.data;
-        const {status, boardId} = req.body;
+        const {status, boardId, position} = req.body;
         const save = await models.Tasks
                 .build({ 
                   title: title,
                   content: content, 
                   board_id: boardId, 
-                  status: status 
+                  status: status,
+                  position: position 
                 })
                 .save();  
            
@@ -59,19 +60,14 @@ router.get('/my', verify, async (req, res, next) => {
 
 router.put('/my', verify, async (req, res, next) => {
     try {
-      
-        
-        const {status, taskId, boardId} = req.body;
+        const {status, taskId, boardId, position} = req.body;
         let change = await models.Tasks
                 .findOne({ 
                     where: { id: taskId } 
                 })
                 .then(task => {
-                    console.log('task', task)        
-
-                    return task.update({ status: status}, {fields: ['status']})
-                })  
-        console.log('change', change)        
+                   return task.update({ status: status, position: position}, {fields: ['status', 'position']})
+                }); 
         const backLogTasks = await models.Tasks.findAll({
                     where: {
                         board_id: boardId,

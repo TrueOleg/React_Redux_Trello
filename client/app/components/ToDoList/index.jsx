@@ -21,17 +21,26 @@ class ToDoList extends React.Component {
         super(props);
         this.state = {
            isOpen: false, 
-           status: 'todo'
+           status: 'todo',
+           lastPosition: 0
         };
         this.showNewTaskForm = this.showNewTaskForm.bind(this);
         this.hideForm = this.hideForm.bind(this);
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (this.props.boardId !== prevProps.boardId) {
-    //         this.props.getTasks(this.props.boardId, this.state.status);
-    //       }
-    // }
+    componentDidUpdate(prevProps) {
+        if (prevProps !== this.props) {
+            if (this.props.toDoTasks.length !== 0) {
+                const last = this.props.toDoTasks.length;
+                const lastTask = this.props.toDoTasks[last-1];
+                const lastPos = +lastTask.position;
+                this.setState({
+                    lastPosition: lastPos
+                });
+            }
+        }
+        
+    }
     
     componentDidMount() {
         // this.props.getTasks(this.props.boardId, this.state.status);
@@ -60,6 +69,7 @@ class ToDoList extends React.Component {
                         hide={this.showNewTaskForm} 
                         status={this.state.status} 
                         boardId={this.props.boardId}
+                        lastPosition={this.state.lastPosition}
                     /> 
                     : <button onClick={this.showNewTaskForm} style={styles.btnAdd}>Add Task</button>;
         const tasks = this.props.toDoTasks !== 0 
