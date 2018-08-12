@@ -10,7 +10,8 @@ import {
 import * as styles from '../style/Home'; 
 import * as Token from '../../servises/Token';
 import * as actions from '../../redux/actions/authAction';
-import BoardsContainer from '../BoardsContainer';
+import * as boardsActions from '../../redux/actions/boardsActions';
+import InvaitBoard from '../InvaitBoard';
 
 
 class Invait extends React.Component {
@@ -31,37 +32,31 @@ class Invait extends React.Component {
     }
 
     componentDidMount() {
-       this.props.getInvaitBoard()
+       const hash = window.location.hash;
+       console.log('hash', hash);
+       this.props.getBoardId(hash);
         
     }
 
    
 
-    logOut() {
-        Token.clearToken();
-        location.reload();
-    }
+    
 
    
     
     render () {
-        const token = localStorage.getItem('token');
+        
 
-        if (!this.props.isAuthenticated && !token) {
-            return <Redirect to="/sign-in"/>;
-        }
-
-        const invaitBoard = this
+        
         
         
         return (
             <React.Fragment>
                 
-                    <div style={styles.header}>
-                        <h1 style={styles.h1}>Trello</h1>
+                    
                         <h2>Invait</h2>
-                        <button onClick={this.logOut} style={styles.btnLogOut}>Log-out</button>    
-                    </div>
+                        
+                    
                     
                     
                
@@ -80,7 +75,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
     setToken: (data) => dispatch(actions.isLogin(data)),
-    
+    getBoardId: (hash) => dispatch(boardsActions.getBoardId(hash)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Invait);

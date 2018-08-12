@@ -18,7 +18,7 @@ const Root = () => {
           <Route path="/sign-in" component={SignInPage} />
           <Route path="/sign-up" component={SignUpPage} />
           <Route path="/" render={ props => <Home {...props} />}/>
-          <Route path="/" render={ props => <Invait {...props} />}/>
+          <Route path="/invait" component={Invait}/>
         </Switch>
       </Router>
     </Provider>  

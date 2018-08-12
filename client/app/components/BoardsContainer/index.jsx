@@ -16,6 +16,7 @@ import NewBoardForm from '../NewBoardForm';
 import ListBoards from '../ListBoards';
 import ViewBoards from '../ViewBoards';
 import Board from '../Board';
+import Invait from '../Invait';
 
 
 class BoardsContainer extends React.Component {
@@ -75,7 +76,8 @@ class BoardsContainer extends React.Component {
                             {form}
                         </div>
                     </div>    
-                    <Route path="/boards" render={() => <Board board={this.props.location.state}/>}/>    
+                    <Route path="/boards" render={() => <Board board={this.props.location.state}/>}/>
+                    <Route path="/invait" render={() => <Invait board={this.props.location.hash}/>}/>     
                 </div> 
             );    
         }

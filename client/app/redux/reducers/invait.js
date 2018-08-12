@@ -1,7 +1,8 @@
 import * as Const from '../constants';
 
 const initialState = {
-  secret: ''
+  secret: '',
+  board: []
 };
 
 export default (state = initialState, action) => {

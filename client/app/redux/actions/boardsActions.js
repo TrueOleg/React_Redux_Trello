@@ -8,6 +8,13 @@ export const saveMyBoards = (boards) => {
   };
 }; 
 
+export const saveInvaitBoard = (board) => {
+    return {
+        type: Const.SAVE_INVAIT_BOARD,
+        board
+    };
+  }; 
+
 export const saveSecret = (secret) => {
     return {
         type: Const.SAVE_SECRET,
@@ -22,6 +29,21 @@ export const getBoards = () => {
         Api.get(`${Const.URL}/boards/my`)
             .then(res => {
               dispatch(saveMyBoards(res.data.boards));
+                
+            })
+            .catch(() => dispatch(loginHasErrored(true)));
+    };
+};
+
+export const getBoardId = (hash) => {
+    return (dispatch) => {
+        console.log('apihash', hash)
+        const punctuationless = hash.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+        const finalString = punctuationless.replace(/\s{2,}/g," ");
+        console.log('finalString', finalString)
+        Api.get(`${Const.URL}/boards/search?id=${finalString}`)
+            .then(res => {
+              dispatch(saveInvaitBoard(res.data.board));
                 
             })
             .catch(() => dispatch(loginHasErrored(true)));

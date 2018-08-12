@@ -80,6 +80,26 @@ router.get('/my', verify, async (req, res, next) => {
     }      
 }); 
 
+router.get('/search', verify, async (req, res, next) => {
+    try {        
+        const hash = req.query.id;
+        console.log('hash', hash)
+        const userId = req._userId;
+        const board = await models.Boards.findOne({
+            attributes: ['id', 'title'], 
+            where: {secret: hash}, raw: true
+        });
+        res.status(200).send({
+            message: 'success',
+            result: true,
+            board
+        });
+    } 
+    catch(err) {
+        next(new Error(err.message));
+    }      
+}); 
+
 
 
 
