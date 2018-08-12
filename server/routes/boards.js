@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { sequelize } = require('../models/sequelize');
+const crypto = require('crypto');
 
 const models = require('../models/sequelize');
 const auth = require('../helpers/auth');
@@ -24,6 +25,36 @@ router.post('/', verify, async (req, res, next) => {
             message: 'success',
             result: true,
             boards
+        });        
+    } 
+    catch(err) {
+        next(new Error(err.message));
+    }   
+});    
+
+router.put('/', verify, async (req, res, next) => {
+    try {
+        const {boardId} = req.body;
+        console.log('boardId', boardId)
+        const id = parseInt(boardId.replace(/\D+/g,""));
+        console.log('id', id)
+        const secretId = String(id);
+        const secretHash = crypto.createHash('md5').update(secretId).digest("hex");
+        console.log('secret', secretHash)
+        const userId = req._userId;
+        const change = await models.Boards
+                .findOne({
+                    where: { id: id }
+                })
+                .then(board => {
+                    return board.update({ secret: secretHash}, {fields: ['secret']})
+                 });
+          
+           
+        res.status(200).send({
+            message: 'success',
+            result: true,
+            secretHash
         });        
     } 
     catch(err) {

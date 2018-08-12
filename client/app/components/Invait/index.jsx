@@ -10,11 +10,10 @@ import {
 import * as styles from '../style/Home'; 
 import * as Token from '../../servises/Token';
 import * as actions from '../../redux/actions/authAction';
-import * as boardActions from '../../redux/actions/boardsActions';
 import BoardsContainer from '../BoardsContainer';
 
 
-class Home extends React.Component {
+class Invait extends React.Component {
     constructor(props) {
         super(props);
         
@@ -29,26 +28,13 @@ class Home extends React.Component {
                     token
                 });
             }
-
-        this.generateLink = this.generateLink.bind(this);
-
     }
 
     componentDidMount() {
-       
+       this.props.getInvaitBoard()
         
     }
 
-    
-
-    generateLink() {
-        const id = String(window.location.search);
-        this.props.createHashSecret(id);
-        const secret = this.props.secret;
-        console.log('secret', secret)
-        const link = document.getElementById('share');
-        link.value = `http://localhost:8080/invait#${secret}`;
-    }
    
 
     logOut() {
@@ -65,6 +51,7 @@ class Home extends React.Component {
             return <Redirect to="/sign-in"/>;
         }
 
+        const invaitBoard = this
         
         
         return (
@@ -72,13 +59,11 @@ class Home extends React.Component {
                 
                     <div style={styles.header}>
                         <h1 style={styles.h1}>Trello</h1>
+                        <h2>Invait</h2>
                         <button onClick={this.logOut} style={styles.btnLogOut}>Log-out</button>    
                     </div>
-                    <div style={styles.sharing}>
-                            <input style={styles.inputSharing} id='share'/>
-                            <button onClick={this.generateLink} style={styles.btnGenLink}>Generate Link</button>   
-                    </div>
-                    <BoardsContainer {...this.props}/>
+                    
+                    
                
             </React.Fragment>    
         );
@@ -89,13 +74,13 @@ class Home extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.auth.user.isAuthenticated,
-        secret: state.invait.secret
+        
     };
   };
 
 const mapDispatchToProps = (dispatch) => ({
     setToken: (data) => dispatch(actions.isLogin(data)),
-    createHashSecret: (boardId) => dispatch(boardActions.createHashSecret(boardId))
+    
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Invait);

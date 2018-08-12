@@ -57,15 +57,35 @@ class Board extends React.Component {
         if ((source.droppableId === destination.droppableId && source.index !== destination.index)
             ||(source.droppableId !== destination.droppableId && source.index !== destination.index)
             ||(source.droppableId !== destination.droppableId && source.index === destination.index)) {
+
             const newIndex = destination.index;
             
             let newPosition;
+
             switch (destination.droppableId) {
-                case 'backLog': newPosition = this.props.myTasks.backLogTasks[newIndex].position-1;
+                case 'backLog':   if (this.props.myTasks.backLogTasks.length === 0) {
+                    newPosition = 1000;
+
+                } else {       
+                                                     newPosition = this.props.myTasks.backLogTasks[newIndex].position-1;
+
+                }
                                 break;
-                case 'todo': newPosition = this.props.myTasks.toDoTasks[newIndex].position-1;
+                case 'todo': if (this.props.myTasks.toDoTasks.length === 0) {
+                    newPosition =  1000;
+
+                } else {              
+                                              newPosition =  this.props.myTasks.toDoTasks[newIndex].position-1;
+
+                }
                                 break;
-                case 'done': newPosition = this.props.myTasks.doneTasks[newIndex].position-1;
+                case 'done': if (this.props.myTasks.doneTasks.length === 0) {
+                                        newPosition =  1000;
+
+                } else {
+                                        newPosition =  this.props.myTasks.doneTasks[newIndex].position-1;
+
+                }
                                 break;                                
 
             }

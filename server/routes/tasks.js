@@ -100,6 +100,51 @@ router.put('/my', verify, async (req, res, next) => {
     catch(err) {
         next(new Error(err.message));
     }   
+}); 
+
+router.delete('/my', verify, async (req, res, next) => {
+    try {
+        const taskId = req.query.task_id;
+        const boardId = req.query.board_id;
+        let deleteTask = await models.Tasks
+                .findOne({ 
+                    where: { id: taskId } 
+                })
+                .then(task => {
+                   return task.destroy()
+                }); 
+        const backLogTasks = await models.Tasks.findAll({
+                    where: {
+                        board_id: boardId,
+                        status: 'backLog'
+                    },
+                    raw: true
+                });  
+        const todoTasks = await models.Tasks.findAll({
+                    where: {
+                        board_id: boardId,
+                        status: 'todo'
+                    },
+                    raw: true
+                }); 
+        const doneTasks = await models.Tasks.findAll({
+                    where: {
+                        board_id: boardId,
+                        status: 'done'
+                    },
+                    raw: true
+                });          
+        res.status(200).send({
+            message: 'success',
+            result: true,
+            backLogTasks,
+            todoTasks,
+            doneTasks
+        });        
+    } 
+    catch(err) {
+        next(new Error(err.message));
+    }   
 });  
 
 

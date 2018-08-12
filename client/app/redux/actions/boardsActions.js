@@ -6,7 +6,15 @@ export const saveMyBoards = (boards) => {
       type: Const.SAVE_MY_BOARDS,
       boards
   };
-};  
+}; 
+
+export const saveSecret = (secret) => {
+    return {
+        type: Const.SAVE_SECRET,
+        secret
+    };
+  };  
+  
 
 export const getBoards = () => {
     return (dispatch) => {
@@ -29,5 +37,20 @@ export const writeBoard = (data) => {
                 
             })
             .catch(() => dispatch(loginHasErrored(true)));
+    };
+};
+
+export const createHashSecret = (boardId) => {
+    return (dispatch) => {
+ 
+        Api.put(`${Const.URL}/boards/`, {boardId})
+            .then(res => {
+                dispatch(saveSecret(res.data.secretHash));
+
+            })
+            .catch(() => dispatch(loginHasErrored(true)));
+            
+        
+                
     };
 };

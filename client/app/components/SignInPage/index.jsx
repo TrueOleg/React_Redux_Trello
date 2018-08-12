@@ -32,9 +32,11 @@ class SignInPage extends React.Component {
       return <Redirect to="/"/>;
     }
     return (
+      <div style={styles.classicBody}>
+        <h1 style={styles.h1}>Trello</h1>
         <form style={styles.formLogin}>
-          <h1>Sign-in</h1>
-          <p>Enter login</p>
+          <h3 style={styles.h3}>Sign-in</h3>
+          <p style={styles.p}>Enter login</p>
           <input
             style={styles.input}
             name  = "login"
@@ -42,7 +44,7 @@ class SignInPage extends React.Component {
             value={this.state.credentials.login}
             onChange={this.onChange}
           />
-          <p>Enter password</p>
+          <p style={styles.p}>Enter password</p>
           <input
             style={styles.input}
             name  = "password"
@@ -59,7 +61,8 @@ class SignInPage extends React.Component {
             onClick={this.onSave}
           />
           <Link to="/sign-up" style={styles.link}>Sign-up</Link> 
-        </form>   
+        </form>  
+      </div>   
     );
   }
 }

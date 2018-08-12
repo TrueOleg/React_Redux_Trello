@@ -7,6 +7,7 @@ import Root from './config/Root';
 const render = (Component) => {
   document.body.style.margin='0';
   document.getElementById('root').style.backgroundColor='rgb(0, 121, 191)';
+  document.getElementById('root').style.height='100vh';
   ReactDOM.render(
     <AppContainer>
       <Component />

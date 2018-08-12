@@ -72,7 +72,7 @@ class BackLogList extends React.Component {
                         boardId={this.props.boardId}
                         lastPosition={this.state.lastPosition}
                     /> 
-                    : <button onClick={this.showNewTaskForm} style={styles.btnAdd}>Add Task</button>;
+                    : <button onClick={this.showNewTaskForm} style={styles.btnAdd}>+Add Task</button>;
       const tasks = this.props.backLogTasks !== 0 
                     ? this.props.backLogTasks.map(
                                                 (item, index) => 
@@ -88,7 +88,9 @@ class BackLogList extends React.Component {
                                                             {...provided.draggableProps}
                                                             {...provided.dragHandleProps}
                                                         >
-                                                            <Task task={item} />
+                                                            <Task 
+                                                                task={item}
+                                                                boardId={this.props.boardId} />
                                                         </div>
                                                     )}
                                                 </Draggable>

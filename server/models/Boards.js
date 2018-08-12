@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     user_id: {
       type: DataTypes.INTEGER
+    },
+    secret: {
+      type: DataTypes.TEXT
     }
   });
 

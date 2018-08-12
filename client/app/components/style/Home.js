@@ -93,7 +93,7 @@ export const btnGenLink = {
 export const btnAdd = {
   border: '0px',
   cursor: 'pointer',
-  backgroundColor: 'rgba(255, 255, 255)',
+  backgroundColor: 'rgb(226, 228, 230)',
   width: '95%',
   fontSize: '16px',
   textAlign: 'start',

@@ -102,3 +102,31 @@ export const changeTask = (boardId, taskId, status, position) => {
                 
     };
 };
+
+export const deleteTask = (taskId, boardId) => {
+    return (dispatch) => {
+ 
+        Api.del(`${Const.URL}/tasks//my?task_id=${taskId}&board_id=${boardId}`)
+            .then(res => {
+                const {backLogTasks, doneTasks, todoTasks} = res.data;
+
+                backLogTasks.sort(function(a, b) {
+                  return a.position - b.position;
+                });
+                doneTasks.sort(function(a, b) {
+                  return a.position - b.position;
+                });
+                todoTasks.sort(function(a, b) {
+                  return a.position - b.position;
+                });
+  
+                dispatch(saveMyBackLogTasks(backLogTasks));
+                dispatch(saveMyDoneTasks(doneTasks));
+                dispatch(saveMyToDoTasks(todoTasks));
+            })
+            .catch(() => dispatch(loginHasErrored(true)));
+            
+        
+                
+    };
+};

@@ -1,7 +1,6 @@
 import React from 'react';   
 import { connect } from 'react-redux';
 
-import User from '../User';
 import * as actions from '../../redux/actions/tasksAction'; 
 import * as styles from '../style/Home'; 
 import close from '../../img/cross-script.png';
