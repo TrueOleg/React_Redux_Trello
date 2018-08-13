@@ -78,6 +78,7 @@ export const inputForm = {
   marginBottom: '5px',
   width: '98%',
   paddingLeft: '5px',
+  outline: 'none',
 };
 
 export const btnGenLink = {
@@ -86,6 +87,26 @@ export const btnGenLink = {
   cursor: 'pointer',
   backgroundColor: 'rgba(255, 255, 255, 0.3)',
   color: 'white',
+  height: '26px',
+  marginLeft: '5px',
+};
+
+export const btnDelTask = {
+  borderRadius: '5px',
+  border: '0px',
+  cursor: 'pointer',
+  backgroundColor: 'rgba(255, 255, 255, 0.3)',
+  height: '26px',
+  marginLeft: '5px',
+  position: 'relative',
+  right: '-180px',
+};
+
+export const btnDelBoard = {
+  borderRadius: '5px',
+  border: '0px',
+  cursor: 'pointer',
+  backgroundColor: 'rgba(255, 255, 255, 0.3)',
   height: '26px',
   marginLeft: '5px',
 };
@@ -152,7 +173,8 @@ export const linkBoard = {
   boxShadow: '0 1px 0 #ccc',
   color: '#444',
   cursor: 'pointer',
-  display: 'block',
+  display: 'flex',
+  justifyContent: 'space-between',
   marginBottom: '8px',
   paddingLeft: '5px',
   position: 'relative',
@@ -196,8 +218,8 @@ export const tasksList = {
 
 export const task = {
   width: '97%',
-  marginLeft: '1%',
-  marginRight: '1%',
+  marginLeft: '1.5%',
+  marginRight: '1.5%',
   marginBottom: '5px',
   paddingTop: '1px',
   paddingBottom: '1px',
@@ -207,13 +229,24 @@ export const task = {
 };
 
 export const form = {
-  width: '94%'
+  width: '94%',
+  margin: '0 auto',
 };
 
 export const close = {
   cursor: 'pointer',
   position: 'absolute',
   top: '7px',
-  right: '7px',
-  
+  right: '7px', 
+};
+
+export const taskText = {
+  textAlign: 'left',
+  paddingLeft: '10px',
+};
+
+
+export const linkCont = {
+  width: '82%',
+  display: 'inline-flex'
 };

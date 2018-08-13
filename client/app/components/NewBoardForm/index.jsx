@@ -46,14 +46,12 @@ class NewBoardForm extends React.Component {
   render() {
     return (
       <form style={styles.form} id='form'>
-       
-        
-        
         <input
           style={styles.inputForm}
           placeholder="enter title"
           name="title"
           label="title"
+          autocomplete='off'
           value={this.state.newBoard.title}
           onChange={this.onChange}
           />
@@ -72,14 +70,10 @@ class NewBoardForm extends React.Component {
           value='✖'
           onClick={this.hideList}
           />  
-    </form>  
-    )
-      
+      </form>  
+    );    
   };
-}
-const mapStateToProps = (state) => {
-    
-  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   writeBoard: (data) => dispatch(actions.writeBoard(data))

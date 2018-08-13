@@ -34,6 +34,15 @@ class Home extends React.Component {
 
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.secret !== this.props.secret) {
+            const secret = this.props.secret;
+            console.log('secret', secret)
+            const link = document.getElementById('share');
+            link.value = `http://localhost:8080/invait#${secret}`;
+        }
+    }
+
     componentDidMount() {
        
         
@@ -44,10 +53,7 @@ class Home extends React.Component {
     generateLink() {
         const id = String(window.location.search);
         this.props.createHashSecret(id);
-        const secret = this.props.secret;
-        console.log('secret', secret)
-        const link = document.getElementById('share');
-        link.value = `http://localhost:8080/invait#${secret}`;
+        
     }
    
 

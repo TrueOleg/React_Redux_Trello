@@ -76,3 +76,17 @@ export const createHashSecret = (boardId) => {
                 
     };
 };
+
+export const deleteBoard = (boardId) => {
+    return (dispatch) => {
+ 
+        Api.del(`${Const.URL}/boards?board_id=${boardId}`)
+            .then(res => {
+                dispatch(saveMyBoards(res.data.boards));
+            })
+            .catch(() => dispatch(loginHasErrored(true)));
+            
+        
+                
+    };
+};

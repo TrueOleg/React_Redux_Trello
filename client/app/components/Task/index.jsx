@@ -22,14 +22,15 @@ class Task extends React.Component {
         
             return (
                 <div style={styles.task}>
-                    <p>{this.props.task.title}</p>
-                    <p>{this.props.task.content}</p>
                     <input
-                        style={styles.btnLogin}
+                        style={styles.btnDelTask}
                         type="submit"
                         value="✖"
                         onClick={this.deleteTask}
                     />
+                    <p style={styles.taskText}>{this.props.task.title}</p>
+                    <p style={styles.taskText}>{this.props.task.content}</p>
+                    
                 </div>  
             )
         

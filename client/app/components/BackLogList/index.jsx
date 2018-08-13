@@ -1,5 +1,5 @@
 import React from 'react';   
-import { Redirect, withRouter } from 'react-router';
+// import { Redirect, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import {
     BrowserRouter as Router,
@@ -10,7 +10,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import * as styles from '../style/Home'; 
 
-import * as actions from '../../redux/actions/authAction'; 
+// import * as actions from '../../redux/actions/authAction'; 
 import * as tasksActions from '../../redux/actions/tasksAction';  
 import NewTaskForm from '../NewTaskForm';
 import Task from '../Task';
@@ -38,28 +38,17 @@ class BackLogList extends React.Component {
                     lastPosition: lastPos
                 });
             }
-        }
-        
-    }
-    
-    componentDidMount() {
-        
-    }
+        }   
+    };
 
     hideForm() {
         this.setState({
             isOpen: false
         });
-    }
+    };
 
     showNewTaskForm(event) {
-        // event.preventDefault();
-        
         this.setState({ isOpen: true});
-    }
-
-    onDragEnd = result => {
-        
     };
     
     render () {
@@ -72,7 +61,12 @@ class BackLogList extends React.Component {
                         boardId={this.props.boardId}
                         lastPosition={this.state.lastPosition}
                     /> 
-                    : <button onClick={this.showNewTaskForm} style={styles.btnAdd}>+Add Task</button>;
+                    : <button 
+                        onClick={this.showNewTaskForm} 
+                        style={styles.btnAdd}>
+                        +Add Task
+                    </button>;
+
       const tasks = this.props.backLogTasks !== 0 
                     ? this.props.backLogTasks.map(
                                                 (item, index) => 
@@ -96,21 +90,20 @@ class BackLogList extends React.Component {
                                                 </Draggable>
                                                 )
                     : null;                                        
-      return (
-          <Droppable droppableId={this.state.status}>
-              {(provided, snapshot) => (
+        return (
+            <Droppable droppableId={this.state.status}>
+                {(provided, snapshot) => (
                 <div style={styles.tasksList} ref={provided.innerRef}>
                     <div style={styles.h2}>BackLog</div>
                     {tasks} 
                     {form}
                     {provided.placeholder}   
                 </div>
-              )}
-          </Droppable>
-      );
-        
-    }
-}
+                )}
+            </Droppable>
+        );
+    };
+};
 
 
 const mapStateToProps = (state) => {

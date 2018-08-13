@@ -100,7 +100,32 @@ router.get('/search', verify, async (req, res, next) => {
     }      
 }); 
 
+router.delete('/', verify, async (req, res, next) => {
+    try {
 
+        const userId = req._userId;
+        const boardId = req.query.board_id;
+        let deleteBoard = await models.Boards
+                .findOne({ 
+                    where: { id: boardId } 
+                })
+                .then(board => {
+                   return board.destroy()
+                }); 
+        const boards = await models.Boards.findAll({
+                    attributes: ['id', 'title'], 
+                    where: {user_id: userId}, raw: true
+                });
+                res.status(200).send({
+                    message: 'success',
+                    result: true,
+                    boards
+                });  
+    } 
+    catch(err) {
+        next(new Error(err.message));
+    }   
+});  
 
 
 module.exports = router;

@@ -53,6 +53,7 @@ class NewTaskForm extends React.Component {
         name="title"
         label="title"
         placeholder="enter title"
+        autoComplete='off'
         value={this.state.newTask.title}
         onChange={this.onChange}
         />
@@ -62,6 +63,7 @@ class NewTaskForm extends React.Component {
         name="content"
         label="content"
         placeholder="enter content"
+        autoComplete='off'
         value={this.state.newTask.content}
         onChange={this.onChange}
         />
