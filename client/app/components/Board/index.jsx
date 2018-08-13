@@ -38,9 +38,14 @@ class Board extends React.Component {
         this.props.getTasks(boardId, 'done');
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.board !== this.props.board) {
+            this.getAllTasks(this.props.board.id);
+        }
+    }
+
     componentDidMount() {
-        console.log('props', this.props)
-        this.getAllTasks(this.props.board.id)
+        this.getAllTasks(this.props.board.id);
     }
 
     onDragEnd = (result, index) => {
