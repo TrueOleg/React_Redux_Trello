@@ -8,17 +8,17 @@ export const saveMyBoards = (boards) => {
   };
 }; 
 
-export const saveInvaitBoard = (board) => {
+export const saveInvaitBoard = (data) => {
     return {
         type: Const.SAVE_INVAIT_BOARD,
-        board
+        data: data
     };
   }; 
 
-export const saveSecret = (secret) => {
+export const saveSecret = (data) => {
     return {
         type: Const.SAVE_SECRET,
-        secret
+        data: data
     };
   };  
   

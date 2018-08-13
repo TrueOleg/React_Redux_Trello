@@ -12,6 +12,7 @@ import * as Token from '../../servises/Token';
 import * as actions from '../../redux/actions/authAction';
 import * as boardsActions from '../../redux/actions/boardsActions';
 import InvaitBoard from '../InvaitBoard';
+import Board from '../Board';
 
 
 class Invait extends React.Component {
@@ -45,22 +46,20 @@ class Invait extends React.Component {
    
     
     render () {
-        
-
-        
+        let board;
+         if (Object.keys(this.props.board).length !== 0) {
+            board = <Board board={this.props.board} />
+        } else {
+            board = null
+        }
+                    
         
         
         return (
-            <React.Fragment>
-                
-                    
-                        <h2>Invait</h2>
-                        
-                    
-                    
-                    
-               
-            </React.Fragment>    
+            <React.Fragment>    
+                <h2>Invait</h2>
+                 {board}
+             </React.Fragment>    
         );
     }
 }
@@ -69,7 +68,7 @@ class Invait extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.auth.user.isAuthenticated,
-        
+        board: state.invait.board
     };
   };
 

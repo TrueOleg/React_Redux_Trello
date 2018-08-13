@@ -39,6 +39,7 @@ class Board extends React.Component {
     }
 
     componentDidMount() {
+        console.log('props', this.props)
         this.getAllTasks(this.props.board.id)
     }
 
