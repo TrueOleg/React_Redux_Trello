@@ -41,6 +41,7 @@ class SignInPage extends React.Component {
             style={styles.input}
             name  = "login"
             label = "login"
+            autoComplete='off'
             value={this.state.credentials.login}
             onChange={this.onChange}
           />

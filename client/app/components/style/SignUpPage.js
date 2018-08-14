@@ -26,6 +26,7 @@ export const btn = {
     marginRight: '80px',
     marginBottom: '5px',
     cursor: 'pointer',
+    outline: 'none',
 };
 
 export const classicBody = {

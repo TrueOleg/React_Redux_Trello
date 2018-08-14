@@ -40,6 +40,7 @@ class SignUpPage extends React.Component {
             style = {styles.input}
             name  = "regLogin"
             label = "regLogin"
+            autoComplete='off'
             value={this.state.credentials.regLogin}
             onChange={this.onChange}
             />
@@ -60,6 +61,7 @@ class SignUpPage extends React.Component {
             name  = "regEmail"
             label = "regEmail"
             type  = "regEmail"
+            autoComplete='off'
             value={this.state.credentials.regEmail}
             onChange={this.onChange}
             />

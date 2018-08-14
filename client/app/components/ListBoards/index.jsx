@@ -28,7 +28,7 @@ class ListBoards extends React.Component {
     render() {
         const { boards } = this.props;
         const comp = boards.map( 
-                        (item) =>   <div style={styles.linkCont}>
+                        (item) =>   <div key={item.id} style={styles.linkCont}>
                                     <Link  
                                         style={styles.linkBoard}
                                         key={item.id}
@@ -41,6 +41,7 @@ class ListBoards extends React.Component {
                                     {item.title}
                                     </Link>
                                     <input
+                                        
                                         id={item.id}
                                         style={styles.btnDelBoard}
                                         type="submit"

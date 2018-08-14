@@ -68,6 +68,7 @@ export const inputSharing = {
   marginBottom: '5px',
   width: '25%',
   paddingLeft: '5px',
+  outline: 'none',
 };
 
 export const inputForm = {
@@ -89,6 +90,7 @@ export const btnGenLink = {
   color: 'white',
   height: '26px',
   marginLeft: '5px',
+  outline: 'none',
 };
 
 export const btnDelTask = {
@@ -97,9 +99,8 @@ export const btnDelTask = {
   cursor: 'pointer',
   backgroundColor: 'rgba(255, 255, 255, 0.3)',
   height: '26px',
-  marginLeft: '5px',
-  position: 'relative',
-  right: '-180px',
+  marginLeft: '92%',
+  
 };
 
 export const btnDelBoard = {
@@ -146,7 +147,7 @@ export const btnAddTask = {
 };
 
 export const boardsCont = {
-  height: '860px',
+  height: '91%',
   width: '100%',
   display: 'flex',
   alignItems: 'flex-start'
@@ -202,6 +203,7 @@ export const boardTasksLists = {
   width: '100%',
   display: 'flex',
   justifyContent: 'space-between',
+  alignItems: 'start'
 };
 
 export const tasksList = {

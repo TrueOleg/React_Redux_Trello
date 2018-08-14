@@ -16,7 +16,8 @@ export const input = {
     backgroundColor: 'hsla(0,0%,100%,.3)',
     border: '0px',
     outline: 'none',
-    paddingLeft: '3px'
+    paddingLeft: '3px',
+    outline: 'none',
 };
 
 export const btnLogin = {
@@ -28,6 +29,7 @@ export const btnLogin = {
     marginRight: '80px',
     marginBottom: '5px',
     cursor: 'pointer',
+    outline: 'none',
 };
 
 export const link = {
