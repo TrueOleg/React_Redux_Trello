@@ -1,5 +1,4 @@
-import React from 'react';   
-import { Redirect, withRouter } from 'react-router';
+import React from 'react'; 
 import { connect } from 'react-redux';
 import {
     BrowserRouter as Router,
@@ -8,11 +7,8 @@ import {
   } from 'react-router-dom';  
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
-import * as styles from '../style/Home'; 
-import * as Token from '../../servises/Token';
-import * as actions from '../../redux/actions/authAction'; 
+import * as styles from '../style/Home';
 import * as tasksActions from '../../redux/actions/tasksAction';  
-import NewBoardForm from '../NewBoardForm';
 import BackLogList from '../BackLogList';
 import ToDoList from '../ToDoList';
 import DoneList from '../DoneList';
@@ -49,7 +45,6 @@ class Board extends React.Component {
     }
 
     onDragEnd = (result, index) => {
-        console.log('result', result);
         const { draggableId, source, destination} = result;
         
        
@@ -71,39 +66,28 @@ class Board extends React.Component {
             switch (destination.droppableId) {
                 case 'backLog':   if (this.props.myTasks.backLogTasks.length === 0) {
                     newPosition = 1000;
-
                 } else {       
-                                                     newPosition = this.props.myTasks.backLogTasks[newIndex].position-1;
-
+                    newPosition = this.props.myTasks.backLogTasks[newIndex].position-1;
                 }
-                                break;
+                    break;
                 case 'todo': if (this.props.myTasks.toDoTasks.length === 0) {
                     newPosition =  1000;
-
                 } else {              
-                                              newPosition =  this.props.myTasks.toDoTasks[newIndex].position-1;
-
+                    newPosition =  this.props.myTasks.toDoTasks[newIndex].position-1;
                 }
-                                break;
+                    break;
                 case 'done': if (this.props.myTasks.doneTasks.length === 0) {
-                                        newPosition =  1000;
-
+                    newPosition =  1000;
                 } else {
-                                        newPosition =  this.props.myTasks.doneTasks[newIndex].position-1;
-
+                    newPosition =  this.props.myTasks.doneTasks[newIndex].position-1;
                 }
-                                break;                                
+                    break;                                
 
             }
             this.props.changeTask(this.props.board.id, draggableId, destination.droppableId, newPosition);
 
             
         }
-        
-        // if (source.droppableId !== destination.droppableId) {
-        //     this.props.changeTask(this.props.board.id, draggableId, destination.droppableId);
-            
-        // }
         
     };
     

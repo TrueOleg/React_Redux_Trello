@@ -1,5 +1,4 @@
-import React from 'react';   
-// import { Redirect, withRouter } from 'react-router';
+import React from 'react';
 import { connect } from 'react-redux';
 import {
     BrowserRouter as Router,
@@ -8,9 +7,7 @@ import {
   } from 'react-router-dom';  
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
-import * as styles from '../style/Home'; 
-
-// import * as actions from '../../redux/actions/authAction'; 
+import * as styles from '../style/Home';  
 import * as tasksActions from '../../redux/actions/tasksAction';  
 import NewTaskForm from '../NewTaskForm';
 import Task from '../Task';

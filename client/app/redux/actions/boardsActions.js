@@ -37,10 +37,10 @@ export const getBoards = () => {
 
 export const getBoardId = (hash) => {
     return (dispatch) => {
-        console.log('apihash', hash)
+        
         const punctuationless = hash.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
         const finalString = punctuationless.replace(/\s{2,}/g," ");
-        console.log('finalString', finalString)
+        
         Api.get(`${Const.URL}/boards/search?id=${finalString}`)
             .then(res => {
               dispatch(saveInvaitBoard(res.data.board));
